@@ -1,4 +1,4 @@
-package br.com.vinicius.model;
+package br.com.vinicius.study.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,12 @@ public class Vertex {
 
     private String name;
     private boolean visited;
-    private List<Vertex> neighborhood;
+    private List<Vertex> neighbors;
 
     public Vertex(String name) {
         this.name = name;
         this.visited = false;
-        this.neighborhood = new ArrayList<>();
+        this.neighbors = new ArrayList<>();
     }
 
     @Override
@@ -28,11 +28,11 @@ public class Vertex {
         this.visited = visited;
     }
 
-    public List<Vertex> getNeighborhood() {
-        return neighborhood;
+    public List<Vertex> getNeighbors() {
+        return neighbors;
     }
 
-    public void addNeighboords(Vertex neighborhood) {
-        this.neighborhood.add(neighborhood);
+    public void addNeighbors(Vertex neighborhood) {
+        this.neighbors.add(neighborhood);
     }
 }
