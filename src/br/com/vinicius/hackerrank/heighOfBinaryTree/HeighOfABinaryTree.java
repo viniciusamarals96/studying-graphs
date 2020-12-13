@@ -1,5 +1,7 @@
 package br.com.vinicius.hackerrank.heighOfBinaryTree;
 
+import br.com.vinicius.study.model.Vertex;
+
 import java.util.*;
 
 public class HeighOfABinaryTree {
@@ -11,26 +13,40 @@ public class HeighOfABinaryTree {
         Node right;
     */
     public static int height(Node root) {
-        Queue<Node> queue = new LinkedList<>();
+        Stack<Node> stack = new Stack<>();
         List<Integer> visitedOnes = new ArrayList<>();
         Integer height = 0;
 
-        queue.add(root);
+        stack.add(root);
         visitedOnes.add(root.data);
 
-        while (!queue.isEmpty()) {
-            Node actual = queue.remove();
+        System.out.println("root: " + root.data);
 
-            System.out.println("Actual visited vertex " + actual.data);
+        int contador = 0;
+        while (!stack.isEmpty()) {
+            Node actual = stack.pop();
 
-            List<Node> listNeighhoods = Arrays.asList(actual.right, actual.left);
-            for (Node v : listNeighhoods) {
+
+            Stack<Node> neighbors = new Stack<>();
+            neighbors.push(actual.left);
+            neighbors.push(actual.right);
+
+            if(actual.right == null && actual.left == null) {
+                if(contador > height)
+                    height = contador;
+
+                contador = 0;
+            }
+
+            for (Node v : neighbors) {
                 if (v != null && !visitedOnes.contains(v.data)) {
                     visitedOnes.add(v.data);
-                    queue.add(v);
+                    stack.push(v);
+                    System.out.println("visitei o " + v.data);
                 }
             }
-            height++;
+            System.out.println("actual: "+ actual.data + ", contador: " + contador + ", height: " + height);
+            contador++;
         }
 
         return height;
